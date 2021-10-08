@@ -22,7 +22,7 @@ void create1(int a[], int n)
         last = p;
     }
 }
-void create(int a[], int n)
+void create2(int a[], int n)
 {
     struct node *p, *last;
     first2 = (struct node *)malloc(sizeof(struct node));
@@ -38,28 +38,42 @@ void create(int a[], int n)
         last = p;
     }
 }
-int form(struct node *q)
+
+void find(struct node *p, struct node *q)
 {
-    struct node *p;
-    p=q;
-    int x=0;
-    while(p!=NULL)
+    int pc=1,qc=1,flag=0;
+    //flag->denote if intersection isfound or not
+    //pc , qc->count off nodes of the two linked loist.
+    while(p->next!=NULL)
     {
-        x=x*10+p->data;
+        while(q->next!=NULL)
+        {
+            if(p->next==q->next)
+            {
+                flag=1;
+                break;
+            }
+            q=q->next;
+            qc++;
+        }
+        if(flag==1)
+        {
+            break;
+        }
         p=p->next;
+        pc++;
     }
-    return x;
+    
+
 }
+
 int main()
 {
-    int a[]={1,2,3};
-    int b[]={3,4,5};
-    create1(a,3);
-    create(b,3);
-    printf("%d\n",form(first1));
-    printf("%d",form(first2));
-    int res=form(first1)+form(first2);
-    printf("\n%d\n",res);
+    int a[] = {1, 3, 5};
+    int b[] = {2, 4, 6};
+    create1(a, 3);
+    create2(b, 3);
+    
 
     return 0;
 }
